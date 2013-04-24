@@ -1,5 +1,5 @@
 {
-  "name": "contacts"
+  "name": "webinos-api-contacts"
 , "publishConfig": { "tag": "alpha" }
 , "description": "contacts API"
 , "keywords": ["webinos", "contacts" , "API"]

@@ -33,4 +33,7 @@
   , "path"
   , "url"
   ]
+, "scripts":{
+    "install":"node-gyp configure build"
+  }
 }

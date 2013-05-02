@@ -3,22 +3,22 @@
 , "publishConfig": { "tag": "alpha" }
 , "description": "contacts API"
 , "keywords": ["webinos", "contacts" , "API"]
-, "version": "0.0.1"
-, "homepage": "http://webinos.org/"
-, "author": "Vito Macchia <vito.macchia@ismb.it>, Paolo Vergori, <paolo.vergori@ismb.it>"
+, "version": "0.8"
+, "homepage": "http://developer.webinos.org/"
+, "author": "Paolo Vergori <vergori@ismb.it>, Michele Morello <morello@ismb.it>"
 , "repository":
   { "type": "git"
-  , "url": "http://dev.webinos.org/git/wp4.git"
+  , "url": "https://github.com/webinos/webinos-api-contacts.git"
   }
 , "bugs":
   { "email": "webinos-wp4-ml@fokus.fraunhofer.de"
-  , "url": ""
+  , "url": "http://jira.webinos.org"
   }
 , "directories": { "contrib": "./contrib"
                  , "doc": "./doc"
                  , "lib": "./lib"
                  , "node_modules": "./node_modules"
-                 , "src": ".src"
+                 , "src": "./src"
                  , "test": "./test"
                  }
 , "main": "./lib/service"

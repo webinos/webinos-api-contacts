@@ -18,7 +18,7 @@
 
 
 var webinos = require("find-dependencies")(__dirname);
-var contactsModule;
+var contactsService;
 
 console.log(webinos.global);
 
@@ -30,68 +30,112 @@ console.log(webinos.global);
 		}
 	});
 
-
-	//~ var RPCHandler = webinos.global.require(webinos.global.rpc.location).RPCHandler;
-	//~ var service = webinos.global.require(webinos.global.api.events.location).Service;
-	//~ var events = new service(RPCHandler);
-	//~ beforeEach(function() {
-		//~ this.addMatchers({
-			//~ toBeFunction: function() {
-				//~ return typeof this.actual === 'function';
-			//~ },
-			//~ toBeObject: function() {
-				//~ return typeof this.actual === 'object';
-			//~ },
-			//~ toBeString: function() {
-				//~ return typeof this.actual === 'string';
-			//~ },
-			//~ toBeNumber: function() {
-				//~ return typeof this.actual === 'number';
-			//~ }
-		//~ });
-	//~ });
-
-
-//~ var contactsModule = require("../../lib/contacts_modules.js");
 var param = [];
 param[0] = {};
 
 var timeout = 1000;
 
 
-describe("test contacts_module, local", function() {
-  
+describe("test contacts_module", function() {
+     
+    beforeEach(function() {
+        waitsFor(function() {
+            return !!contactsService;
+        }, "finding a contacts service", 5000);
+    });
     
-    describe("check if retrieved contacts is formed as expected", function() {
+    
+    it("could be found and be bound", function() {
+        expect(contactsService).toBeDefined();
+    });
+    
+    
+    it("has the necessary properties as service object", function() {
+        expect(contactsService.state).toBeDefined();
+        expect(contactsService.api).toEqual(jasmine.any(String));
+        expect(contactsService.id).toEqual(jasmine.any(String));
+        expect(contactsService.displayName).toEqual(jasmine.any(String));
+        expect(contactsService.description).toEqual(jasmine.any(String));
+        expect(contactsService.icon).toEqual(jasmine.any(String));
+        expect(contactsService.bindService).toEqual(jasmine.any(Function));
+    });
+    
+    it("has the necessary properties and functions as Contacts API service", function() {
+        expect(contactsService.find).toEqual(jasmine.any(Function));
+    });
+
+    
+    
+    it("retrive contacts list", function() {
+        var parameters = {};
+        var results = false;
+        if (contactsService)
+        {
+            parameters.fields = {};
+            contactsService.find(parameters.fields, function(list){
+                results = list;
+            });
+            
+            waitsFor(function() {
+            return results;
+            }, "success callback has been called", 200);
+            
+            runs(function() {
+                contacts = results;
+                expect(results).toBeDefined();
+            }); 
+        }
+    });
       
-        it("check if returned contact fields are W3C compliant", function() {       		 	
-            contactsModule.findContacts(param, function(contacts){ 
-                expect(contacts).not.toBeNull();	    
+      
+    it("check if returned contact fields are W3C compliant", function() {	
+        
+        var parameters = {};
+        var results = false;
+        
+        if (contactsService)
+        {
+            parameters.fields = {};
+            contactsService.find(parameters.fields, function(list){
+                results = list;
+            });
+            
+            waitsFor(function() {
+            return results;
+            }, "success callback has been called", 200);
+            
+            runs(function() {
+                contacts = results;
+               
+                expect(contacts).not.toBeNull();
+                
+                console.log("\n\n\n");
+                console.log(contacts);
                 
                 if(contacts !== undefined){
                     for(var i=0;i<contacts.length;i++){
-                    expect(contacts[i].id).not.toBeUndefined();
-                    expect(contacts[i].displayName).not.toBeUndefined();
-                    expect(contacts[i].name).not.toBeUndefined();
-                    expect(contacts[i].nickname).not.toBeUndefined();
-                    //~ expect(contacts[i].phoneNumbers).not.toBeUndefined();
-                    //~ expect(contacts[i].emails).not.toBeUndefined();
-                    //~ expect(contacts[i].addresses).not.toBeUndefined();
-                    //~ expect(contacts[i].ims).not.toBeUndefined();
-                    //~ expect(contacts[i].organizations).not.toBeUndefined();
-                    //~ expect(contacts[i].revision).not.toBeUndefined();
-                    //~ expect(contacts[i].birthday).not.toBeUndefined();
-                    //~ expect(contacts[i].gender).not.toBeUndefined();
-                    //~ expect(contacts[i].note).not.toBeUndefined();
-                    //~ expect(contacts[i].photos).not.toBeUndefined();
-                    //~ expect(contacts[i].categories).not.toBeUndefined();
-                    //~ expect(contacts[i].urls).not.toBeUndefined();
-                    //~ expect(contacts[i].timezone).not.toBeUndefined();						
+                        expect(contacts[i].id).not.toBeUndefined();
+                        expect(contacts[i].displayName).not.toBeUndefined();
+                        expect(contacts[i].name).not.toBeUndefined();
+                        expect(contacts[i].nickname).not.toBeUndefined();
+                        //~ expect(contacts[i].phoneNumbers).not.toBeUndefined();
+                        expect(contacts[i].emails).not.toBeUndefined();
+                        //~ expect(contacts[i].addresses).not.toBeUndefined();
+                        //~ expect(contacts[i].ims).not.toBeUndefined();
+                        //~ expect(contacts[i].organizations).not.toBeUndefined();
+                        //~ expect(contacts[i].revision).not.toBeUndefined();
+                        //~ expect(contacts[i].birthday).not.toBeUndefined();
+                        //~ expect(contacts[i].gender).not.toBeUndefined();
+                        //~ expect(contacts[i].note).not.toBeUndefined();
+                        //~ expect(contacts[i].photos).not.toBeUndefined();
+                        //~ expect(contacts[i].categories).not.toBeUndefined();
+                        //~ expect(contacts[i].urls).not.toBeUndefined();
+                        //~ expect(contacts[i].timezone).not.toBeUndefined();						
                     }
-                }	    
+                }
             });
-        });      
-    });                        
+        }
+    }); 
 });
 
     

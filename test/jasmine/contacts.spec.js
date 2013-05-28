@@ -18,8 +18,17 @@
 
 
 var webinos = require("find-dependencies")(__dirname);
+var contactsModule;
 
 console.log(webinos.global);
+
+    webinos.discovery.findServices(new ServiceType("http://www.w3.org/ns/api-perms/contacts"), {
+		onFound: function (unboundService) {
+			unboundService.bindService({onBind: function(service) {
+				contactsService = service;
+			}});
+		}
+	});
 
 
 	//~ var RPCHandler = webinos.global.require(webinos.global.rpc.location).RPCHandler;
@@ -43,7 +52,7 @@ console.log(webinos.global);
 	//~ });
 
 
-var contactsModule = require("../../lib/contacts_modules.js");
+//~ var contactsModule = require("../../lib/contacts_modules.js");
 var param = [];
 param[0] = {};
 

@@ -32,7 +32,7 @@
       'copies': [
         {
         'files': [
-          'build/Release/localcontacts.node',
+          '<(PRODUCT_DIR)/localcontacts.node',
         ],
         'destination': 'node_modules/',
         }],

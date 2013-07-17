@@ -38,7 +38,7 @@ browser.visit(totalPath).
       var succeeded = results.querySelector(".passed");
       if (failed !== null) {
         console.log("Failed some tests");
-        console.log(browser.HTML(".results"));
+        console.log(browser.html(".results"));
         return onFailure("Tests failed");
       }
       if (succeeded !== null) {

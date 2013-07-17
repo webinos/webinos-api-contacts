@@ -25,6 +25,8 @@
 , "devDependencies":
   { "webinos-jsonrpc2": "*"
 ,   "webinos-utilities": "git+https://github.com/webinos/webinos-utilities.git"
+,   "zombie": "~2.0.0-alpha15"
+,   "jasmine-node": "x.x.x"
   }
 , "dependencies":
   { "xml2js": "0.1.12"
@@ -38,6 +40,7 @@
   , "url"
   ]
 , "scripts":{
-    "install":"node-gyp configure build"
+    "install":"node-gyp configure build",
+    "travis-api-test" : "./test/tools/travis-test.sh"
   }
 }

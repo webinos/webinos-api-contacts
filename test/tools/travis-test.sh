@@ -64,8 +64,18 @@ sleep 5
 echo "Started the PZP and waited" 
 
 # run the node test script and wait 2 seconds
+set +e
 node $TOOLS_DIR/zombie-test.js
+export TEST_RESULT=$?
 sleep 2
 
 # kill the PZP
 kill -9 $PZP_PID
+
+if [ $TEST_RESULT -eq 0 ]; then
+	echo "TEST PASSED"
+else
+	echod "TEST FAILED"
+fi
+
+exit $TEST_RESULT

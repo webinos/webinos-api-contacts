@@ -78,7 +78,7 @@ describe("test contacts_module", function() {
             
             waitsFor(function() {
             return results;
-            }, "success callback has been called", 2000);
+            }, "success callback has been called", 5000);
             
             runs(function() {
                 contacts = results;
@@ -102,7 +102,7 @@ describe("test contacts_module", function() {
             
             waitsFor(function() {
             return results;
-            }, "success callback has been called", 2000);
+            }, "success callback has been called", 5000);
             
             runs(function() {
                 contacts = results;

@@ -1,7 +1,6 @@
 {
   'variables': {
     'module_name': 'localcontacts',#Specify the module name here
-	#you may override the variables found in node_module.gypi here or through command line
   },
   'targets': [
     {
@@ -33,7 +32,7 @@
       'copies': [
         {
         'files': [
-          'build/Release/localcontacts.node',
+          '<(PRODUCT_DIR)/localcontacts.node',
         ],
         'destination': 'node_modules/',
         }],

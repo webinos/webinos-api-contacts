@@ -68,7 +68,7 @@ describe("Contacts API", function() {
             
             waitsFor(function() {
 			return results;
-            }, "success callback has been called", 200);
+            }, "success callback has been called", 5000);
             
             runs(function() {
                 contacts = results;
@@ -92,7 +92,7 @@ describe("Contacts API", function() {
             
             waitsFor(function() {
 			return results;
-            }, "success callback has been called", 200);
+            }, "success callback has been called", 5000);
             
             runs(function() {
                 contacts = results;

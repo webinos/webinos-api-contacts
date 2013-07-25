@@ -15,16 +15,12 @@
  ******************************************************************************/
 
 (function()
-{
+{   
     Contacts = function(obj) {
-		this.base = WebinosService;
-		this.base(obj);
-		
-		this.syncGoogleContacts = syncGoogleContacts;
-		this.find = find;
+        WebinosService.call(this, obj);
     };
     
-    Contacts.prototype = new WebinosService;
+    _webinos.registerServiceConstructor("http://webinos.org/api/contacts", Contacts);        
 
     Contacts.prototype.bindService = function (bindCB, serviceId) {
 	    // actually there should be an auth check here or whatever, but we just always bind

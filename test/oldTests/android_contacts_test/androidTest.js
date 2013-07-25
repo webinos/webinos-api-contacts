@@ -17,7 +17,7 @@
 ******************************************************************************/
 
 var util = require('util');
-var contacts = require('bridge').load('org.webinos.impl.ContactManagerImpl', this);
+var contacts = require('bridge').load(require("../../../platform_interfaces.json").android.ContactManagerImpl, this);
 var fs = require ('fs');
 var path = require('path');
 

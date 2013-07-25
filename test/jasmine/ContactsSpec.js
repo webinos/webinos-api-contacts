@@ -20,7 +20,7 @@ describe("Contacts API", function() {
 	var contactsService;
     var contacts = null;
 
-	webinos.discovery.findServices(new ServiceType("http://www.w3.org/ns/api-perms/contacts"), {
+    webinos.discovery.findServices(new ServiceType("http://webinos.org/api/contacts"), {
 		onFound: function (unboundService) {
 			unboundService.bindService({onBind: function(service) {
 				contactsService = service;

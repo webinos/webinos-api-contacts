@@ -44,7 +44,6 @@
 
 
     $('#btnFindService').bind('click', function() {
-      console.log('********ContactsClient: find service button clicked');
       contactsService = {};
       recentService = null;
       $('#getContactsServices').empty();
@@ -61,13 +60,40 @@
     });
 
     $('#btnBindService').bind('click', function() {
-      console.log("**Bind button clicked**")
       recentService = contactsService[$('#getContactsServices option:selected').val()];
       recentService.bindService({onBind:function(service) {
       logMessage('CONTACTS API ' + service.api + ' bound.');
       $('#html_contacts').html("<i><b>Contacts</b></i> webinos rpc service found!<br>Please select contacts type, fill the text areas then press <i>Authenticate</i> button above.");
         }});
     });
+
+
+//  function syncThunderbirdContacts
+  $('#btnSyncThunderbird').bind('click', function()
+  {
+    if(recentService)
+    {
+        var parameters = {};
+        recentService.syncThunderbirdContacts(parameters, auth_SuccessCB, auth_ErrorCB);
+    }
+    else
+    {
+      document.getElementById('html_contacts').innerHTML = "ERROR: service unreachable";
+    }
+  });
+
+//  function syncOutlookContacts
+  $('#btnSyncOutlook').bind('click', function(){
+    if(recentService)
+    {
+        var parameters = {};
+        recentService.syncOutlookContacts(parameters, auth_SuccessCB, auth_ErrorCB);
+    }
+    else
+    {
+      document.getElementById('html_contacts').innerHTML = "ERROR: service unreachable";
+    }
+  });
 
 //  function syncGoogleContacts_cb()
   $('#btnSyncGoogle').bind('click', function()
@@ -80,18 +106,17 @@
         parameters.usr = usr;
         parameters.pwd = pwd;
         //contactsService[0]
-        recentService.syncGoogleContacts(parameters, auth_SuccessCB, auth_ErrorCB)
+        recentService.syncGoogleContacts(parameters, auth_SuccessCB, auth_ErrorCB);
     }
     else
     {
-      document.getElementById('html_contacts').innerHTML = "PROBLEM: Service unreachable";
+      document.getElementById('html_contacts').innerHTML = "Error: service unreachable";
     }
   });
 
   //function find_contacts_cb()
   $('#btnFindServiceContacts').bind('click', function()
     {
-        console.log("FindContacts clicked");
         var parameters = {};
         var result = false;
         if (recentService)//(contactsService[0])
@@ -129,14 +154,11 @@
   // Print a contact list to HTML document
   function print_contact_list(list)
   {
-    //alert("contact list size " + list.length)
-    //clean then write
     document.getElementById('contactList').innerHTML = "";
     if (list.length > 0)
     {
       for ( var i = 0; i < list.length; i++)
       {
-        //        console.log(list[i]);
         var contactString = (list[i].displayName == "" ? "<b>Anonymous</b></br>" : "<b>Name: </b>" +
           list[i].displayName + "<br>");
         contactString += ((list[i].nickname == undefined || list[i].nickname == "") ? "" : "<b>Nickname: </b>" +
@@ -242,9 +264,13 @@
           </div>
 
           <div style="background-color:lightgray; border:1px solid black">
-            <button id="btnSyncGoogle" class="button">Synch Google Contacts</button>
+            <button id="btnSyncThunderbird" class="button">load from Thunderbird</button>
             <br>
-            <button id="btnFindServiceContacts" class="button" title="Leave search fields empty to get the whole contacts list">Find Local Contact!</button>
+            <button id="btnSyncOutlook" class="button">load from Outlook</button>
+            <br>
+            <button id="btnSyncGoogle" class="button">load from Google</button>
+            <br>
+            <button id="btnFindServiceContacts" class="button" title="Leave search fields empty to get the whole contacts list">Find</button>
           </div>
 
           <div id="html_contacts" style="background-color:lightgray; border:1px solid black">
@@ -275,7 +301,7 @@
                 placeholder="Address" /><br>
             </p>
           </div>
-          <div id="contactList">
+          <div id="contactList" style="overflow:scroll; height: 350px;">
             <script> document.getElementById('contactList').innerHTML = "";</script>
           </div>
         </div>

@@ -14,16 +14,15 @@
  * limitations under the License.
  ******************************************************************************/
 
-(function()
-{   
+(function(){   
     Contacts = function(obj) {
         WebinosService.call(this, obj);
-    };
-    
+    };    
     _webinos.registerServiceConstructor("http://webinos.org/api/contacts", Contacts);        
 
     Contacts.prototype.bindService = function (bindCB, serviceId) {
-	    // actually there should be an auth check here or whatever, but we just always bind
+        this.syncOutlookContacts = syncOutlookContacts;
+        this.syncThunderbirdContacts = syncThunderbirdContacts;
 	    this.syncGoogleContacts = syncGoogleContacts;
 	    this.find = find;
 
@@ -31,9 +30,37 @@
 		    bindCB.onBind(this);
 	    };
     }
-
     
+    /**
+     * sync Outlook contacts with local cache on win32 systems ONLY
+     * */
+    function syncOutlookContacts(attr, successCB,errorCB)
+    {
+        var rpc = webinos.rpcHandler.createRPC(this, "syncOutlookContacts", [ attr ]);
+        
+        webinos.rpcHandler.executeRPC(rpc, function(params){
+            successCB(params);
+        }, function(error){
+            if (typeof(errorCB) !== 'undefined')
+                errorCB(error);
+        });
+    };
+    
+    /**
+     * sync thunderbird contacts with local cache
+     * */
+    function syncThunderbirdContacts(attr, successCB,errorCB)
+    {
+        var rpc = webinos.rpcHandler.createRPC(this, "syncThunderbirdContacts", [ attr ]);
 
+        webinos.rpcHandler.executeRPC(rpc, function(params){
+            successCB(params);
+        }, function(error){
+            if (typeof(errorCB) !== 'undefined')
+                errorCB(error);
+        });
+    };
+   
     /**
     * returns true if contacts service is authenticated with GMail using username and password
     * or a valid address book file could be open
@@ -41,7 +68,7 @@
     * */
     function syncGoogleContacts(attr, successCB,errorCB)
     {
-        var rpc = webinos.rpcHandler.createRPC(this, "syncGoogleContacts", [ attr ]); // RPCservicename,
+        var rpc = webinos.rpcHandler.createRPC(this, "syncGoogleContacts", [ attr ]);
         // function
         webinos.rpcHandler.executeRPC(rpc, function(params)
         {
@@ -61,7 +88,7 @@
      */
     function find(attr,successCB,errorCB)
     {
-        var rpc =webinos.rpcHandler.createRPC(this, "find", [ attr ]); // RPCservicename,
+        var rpc = webinos.rpcHandler.createRPC(this, "find", [ attr ]);
         //RPCservicename,
         // function
         webinos.rpcHandler.executeRPC(rpc, function(params)

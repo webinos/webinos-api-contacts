@@ -1,47 +1,39 @@
 {
-  "name": "webinos-api-contacts"
-, "publishConfig": { "tag": "alpha" }
-, "description": "contacts API"
-, "keywords": ["webinos", "contacts" , "API"]
-, "version": "0.8.0"
-, "homepage": "http://developer.webinos.org/"
-, "author": "Paolo Vergori <vergori@ismb.it>, Michele Morello <morello@ismb.it>"
-, "repository":
-  { "type": "git"
-  , "url": "https://github.com/webinos/webinos-api-contacts.git"
-  }
-, "bugs":
-  { "email": "webinos-wp4-ml@fokus.fraunhofer.de"
-  , "url": "http://jira.webinos.org"
-  }
-, "directories": { "contrib": "./contrib"
-                 , "doc": "./doc"
-                 , "lib": "./lib"
-                 , "node_modules": "./node_modules"
-                 , "src": "./src"
-                 , "test": "./test"
-                 }
-, "main": "./lib/service"
-, "devDependencies":
-  { "webinos-jsonrpc2": "*"
-,   "webinos-utilities": "git+https://github.com/webinos/webinos-utilities.git"
-,   "zombie": "~2.0.0-alpha15"
-,   "jasmine-node": "x.x.x"
-  }
-, "dependencies":
-  { "xml2js": "0.1.12"
-  , "seq": "0.3.5"
-  }
-, "bundleDependencies":
-  [ "events"
-  , "fs"
-  , "https"
-  , "path"
-  , "url"
-  ]
-, "scripts":{
-    "preinstall":"node ./installWin32Ole.js",
-    "install":"node-gyp configure build",
-    "travis-api-test" : "./test/tools/travis-test.sh"
-  }
+    "name": "webinos-api-contacts",
+    "publishConfig": { "tag": "beta" },
+    "description": "contacts API",
+    "keywords": ["webinos", "contacts" , "API"],
+    "version": "1.0.0",
+    "homepage": "http://developer.webinos.org/",
+    "author": "Paolo Vergori <vergori@ismb.it>, Michele Morello <morello@ismb.it>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/webinos/webinos-api-contacts.git"
+    },
+    "bugs": {
+        "email": "webinos-wp4-ml@fokus.fraunhofer.de",
+        "url": "http://jira.webinos.org"
+    },
+    "directories": {
+        "contrib": "./contrib", 
+        "doc": "./doc", 
+        "lib": "./lib",
+        "node_modules": "./node_modules",
+        "src": "./src",
+        "test": "./test"
+    }, 
+    "main": "./lib/service",
+    "devDependencies": {
+        "webinos-jsonrpc2": "*",
+        "webinos-utilities": "git+https://github.com/webinos/webinos-utilities.git",
+        "zombie": "~2.0.0-alpha15",
+        "jasmine-node": "x.x.x"
+    },
+    "dependencies": {},
+    "bundleDependencies": [ "fs", "https", "path"],
+    "scripts": {
+        "preinstall":"node ./installWin32Ole.js",
+        "install":"node-gyp configure build",
+        "travis-api-test" : "./test/tools/travis-test.sh"
+    }
 }

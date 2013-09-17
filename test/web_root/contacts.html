@@ -21,6 +21,7 @@
 
     <link rel="stylesheet" href="../css/index.css" type="text/css" media="screen"/>
     <link href='http://fonts.googleapis.com/css?family=Ovo' rel='stylesheet' type='text/css'>
+    <script src="https://apis.google.com/js/client.js"></script>
     <script src="../js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="../webinos.js"></script>
 
@@ -40,8 +41,6 @@
     
     var contactsService = {};
     var recentService;
-
-
 
     $('#btnFindService').bind('click', function() {
       contactsService = {};
@@ -100,13 +99,28 @@
   {
     if(recentService) //(contactsService[0])
     {
-        var parameters = {};
-        usr = $('#usernameText').val();
-        pwd = $('#passwordText').val();
-        parameters.usr = usr;
-        parameters.pwd = pwd;
-        //contactsService[0]
-        recentService.syncGoogleContacts(parameters, auth_SuccessCB, auth_ErrorCB);
+        /*WARNING
+        /*Webinos provides the following credentials just for this testbed purpose.
+         *There is no guarantee that this credentials will be keept up to date
+         *If you are a developer, please, register your application at https://developers.google.com/console
+         *in order to receive your own clientId, apiKey and register your personal callbackUrl.
+        */
+        var clientId = '581635262587-trifvriou7toom8bd9mm13pm2qpbp8r6.apps.googleusercontent.com';
+        var apiKey = '8kfG8xGYlDtA9iVtgf9xIpEc';
+        var callbackUrl = 'http://localhost:8888';
+        /*************************/
+        var scopes = 'https://www.google.com/m8/feeds/';
+        var params = {};
+
+        gapi.client.setApiKey(apiKey);
+        gapi.auth.authorize({client_id: clientId, scope: scopes, immediate: false}, function(authResult){
+            if (authResult && !authResult.error) {
+                //this propriety must be deleted because it contains a reference to the current window object
+                delete authResult['g-oauth-window'];
+                recentService.syncGoogleContacts(authResult, auth_SuccessCB, auth_ErrorCB);
+            } else
+                document.getElementById('html_contacts').innerHTML = "Error: Google failed to authenticate";                
+        });                                
     }
     else
     {
@@ -285,8 +299,6 @@
       <!--Right part of the table-->
       <td width="50%">
         <div>
-          <!--           <p id="cwd"></p>
-          <ul id="ls"></ul> -->
           <div id="find_contacts"   div style="background-color:lightgray; border:1px solid black">
             <p>
               <label for="findContactName">Name: </label> <input

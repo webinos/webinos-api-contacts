@@ -75,7 +75,7 @@ kill -9 $PZP_PID
 if [ $TEST_RESULT -eq 0 ]; then
 	echo "TEST PASSED"
 else
-	echod "TEST FAILED"
+	echo "TEST FAILED"
 fi
 
 exit $TEST_RESULT

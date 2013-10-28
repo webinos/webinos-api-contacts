@@ -41,12 +41,12 @@ describe("Contacts API", function() {
     
     
     it("has the necessary properties as service object", function() {
-		expect(contactsService.state).toBeDefined();
+		//expect(contactsService.state).toBeDefined();
 		expect(contactsService.api).toEqual(jasmine.any(String));
 		expect(contactsService.id).toEqual(jasmine.any(String));
 		expect(contactsService.displayName).toEqual(jasmine.any(String));
 		expect(contactsService.description).toEqual(jasmine.any(String));
-		expect(contactsService.icon).toEqual(jasmine.any(String));
+		//expect(contactsService.icon).toEqual(jasmine.any(String));
 		expect(contactsService.bindService).toEqual(jasmine.any(Function));
 	});
     
@@ -108,19 +108,19 @@ describe("Contacts API", function() {
                         expect(contacts[i].displayName).not.toBeUndefined();
                         expect(contacts[i].name).not.toBeUndefined();
                         expect(contacts[i].nickname).not.toBeUndefined();
-                        //~ expect(contacts[i].phoneNumbers).not.toBeUndefined();
+                        expect(contacts[i].phonenumbers).not.toBeUndefined();
                         expect(contacts[i].emails).not.toBeUndefined();
-                        //~ expect(contacts[i].addresses).not.toBeUndefined();
-                        //~ expect(contacts[i].ims).not.toBeUndefined();
-                        //~ expect(contacts[i].organizations).not.toBeUndefined();
-                        //~ expect(contacts[i].revision).not.toBeUndefined();
-                        //~ expect(contacts[i].birthday).not.toBeUndefined();
-                        //~ expect(contacts[i].gender).not.toBeUndefined();
-                        //~ expect(contacts[i].note).not.toBeUndefined();
-                        //~ expect(contacts[i].photos).not.toBeUndefined();
-                        //~ expect(contacts[i].categories).not.toBeUndefined();
-                        //~ expect(contacts[i].urls).not.toBeUndefined();
-                        //~ expect(contacts[i].timezone).not.toBeUndefined();						
+                        expect(contacts[i].addresses).not.toBeUndefined();
+                        expect(contacts[i].ims).not.toBeUndefined();
+                        expect(contacts[i].organizations).not.toBeUndefined();
+                        expect(contacts[i].revision).not.toBeUndefined();
+                        expect(contacts[i].birthday).not.toBeUndefined();
+                        expect(contacts[i].gender).not.toBeUndefined();
+                        expect(contacts[i].note).not.toBeUndefined();
+                        expect(contacts[i].photos).not.toBeUndefined();
+                        expect(contacts[i].categories).not.toBeUndefined();
+                        expect(contacts[i].urls).not.toBeUndefined();
+                        expect(contacts[i].timezone).not.toBeUndefined();						
                     }
                 }
             });

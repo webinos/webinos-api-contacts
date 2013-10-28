@@ -25,15 +25,16 @@ Browser.debug = false;
 
 browser = new Browser()
 
-var totalPath = "http://localhost:8080/webinos-api-contacts/test/web_root/contacts.html";
+var totalPath = "http://localhost:8080/webinos-api-contacts/test/jasmine/Contacts.html";
 
 console.log("Visiting: " + totalPath);
 
 browser.visit(totalPath).
   then(function () {
-      //assert.ok(browser.success);
+      //assert.ok(browser.success);      
       var document = browser.document;
       var results = document.querySelector(".symbolSummary");
+      console.log(results);
       var failed = results.querySelector(".failed");
       var succeeded = results.querySelector(".passed");
       if (failed !== null) {

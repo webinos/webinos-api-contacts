@@ -25,7 +25,7 @@ Browser.debug = false;
 
 browser = new Browser()
 
-var totalPath = "http://localhost:8080/webinos-api-contacts/test/jasmine/Contacts.html";
+var totalPath = "http://localhost:8080/webinos-api-contacts/test/web_root/jasmine/Contacts.html";
 
 console.log("Visiting: " + totalPath);
 

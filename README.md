@@ -67,7 +67,7 @@ Alternatively you can use the webinos dashboard to allow the user choose the con
 
 ## Methods ##
 
-Once you have a reference to a contact API you can use the following methods:
+Once you have a reference to a contact API you can use the following methods.
 
 ### find (parameters, successCB, errorCB)
 
@@ -90,6 +90,7 @@ Synchronizes Outlook contacts with local cache
 
 ## Links ##
 
+- [Usage examples](https://github.com/webinos/webinos-api-contacts/wiki/Examples)
 - [Specifications](http://dev.webinos.org/specifications/api/contacts.html)
 - [webinos enabled tweeting](https://developer.webinos.org/webinos-enabled-tweeting) (demo application)
 - [Contacts app](https://github.com/webinos-apps/app-contacts) (very simple use of contacts API)

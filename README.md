@@ -26,7 +26,7 @@ For developers that want to tweak the API, you should fork this repository and c
 	git clone https://github.com/<your GitHub account>/webinos-api-contacts.git
 	npm install
 
-## Getting a referece to the service ##
+## Getting a reference to the service ##
 
 To discover the contacts api you will have to search for the "http://webinos.org/api/contacts" service. Example:
 

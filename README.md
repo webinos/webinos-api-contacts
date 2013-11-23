@@ -14,7 +14,7 @@ The current implementation of the API support contacts from the following dataso
 
 ## Installation ##
 
-To install the contacts API you will need to install the node module inside the webinos pzp.
+To install the contacts API you will need to npm the node module inside the webinos pzp.
 
 For end users, you can simply open a command prompt in the root of your webinos-pzp and do: 
 

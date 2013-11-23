@@ -55,15 +55,10 @@ Alternatively you can use the webinos dashboard to allow the user choose the con
          	],
             select:"devices"
          }
-     }, function successFn(data){
-			if (data.result.length > 0){
-				// User selected some contact APIs
-			}
-	 }, function errorFn(e){
-			// Notify user
-			console.log(e.message);
-	 }
-	);
+     }).onAction(function successFn(data){
+          if (data.result.length > 0){
+          // User selected some contact APIs
+     }});
 
 ## Methods ##
 

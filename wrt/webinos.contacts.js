@@ -19,7 +19,12 @@
 (function(){   
     Contacts = function(obj) {
         WebinosService.call(this, obj);
-    };    
+    };  
+	// Inherit all functions from WebinosService
+	Contacts.prototype = Object.create(WebinosService.prototype);	
+	// The following allows the 'instanceof' to work properly
+	Contacts.prototype.constructor = Contacts;
+	// Register to the service discovery
     _webinos.registerServiceConstructor("http://webinos.org/api/contacts", Contacts);        
 
     Contacts.prototype.bindService = function (bindCB, serviceId) {

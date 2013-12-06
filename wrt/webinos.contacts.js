@@ -19,8 +19,15 @@
 (function(){   
     Contacts = function(obj) {
         WebinosService.call(this, obj);
-    };    
-    _webinos.registerServiceConstructor("http://webinos.org/api/contacts", Contacts);        
+    };  
+	// Inherit all functions from WebinosService
+	Contacts.prototype = Object.create(WebinosService.prototype);	
+	// The following allows the 'instanceof' to work properly
+	Contacts.prototype.constructor = Contacts;
+	// Register to the service discovery
+    _webinos.registerServiceConstructor("http://webinos.org/api/contacts", Contacts); 
+    // If you want to support the depricated uri, uncomment the following line
+    //_webinos.registerServiceConstructor("http://www.w3.org/ns/api-perms/contacts", Contacts);        
 
     Contacts.prototype.bindService = function (bindCB, serviceId) {
         this.syncOutlookContacts = syncOutlookContacts;
